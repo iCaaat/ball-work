@@ -1,12 +1,20 @@
 
 // 设置画布
- 
  const canvas = document.querySelector('canvas');
  const ctx = canvas.getContext('2d');
  
  const width = canvas.width = window.innerWidth;
  const height = canvas.height = window.innerHeight;
  
+
+ const backgroundImage = new Image();
+backgroundImage.src = 'img/background.jpg'; // 这里是背景图片的路径
+
+backgroundImage.onload = function() {
+  // 在 canvas 上绘制背景图像
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+};
+
  // 生成随机数的函数
  
  function random(min,max) {
@@ -204,6 +212,11 @@ function addBall(ball) {
 }
 
 function loop() {
+  // 每次循环之前清空 canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+  // 绘制背景
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "rgba(0, 0, 0, 0.30)";
   ctx.fillRect(0, 0, width, height);
 
